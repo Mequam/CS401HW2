@@ -48,7 +48,7 @@ public static int rotateRange(int x,int shift,int start,int stop) {
 }
 //this function takes a shift amount and uses it to encode the givenc haracter
 public static char EncodeChar(char c,int shift) {
-    return (char)rotateRange((int)c, shift, 48, 90);
+    return (char)rotateRange((int)c, shift, 45, 96);
 }
 @Override
 public String encode(String data) {
