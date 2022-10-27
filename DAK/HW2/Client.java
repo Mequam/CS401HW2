@@ -1,5 +1,8 @@
 package DAK.HW2;
 
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -24,6 +27,24 @@ public class Client {
         System.out.println();
         String lastName = demandUsername(cin, "Last Name: ");
 
+        String data = firstName + "_" + lastName;
+        try {
+            DatagramSocket udpSocket = new DatagramSocket(2645);
+            
+            DatagramPacket p = new DatagramPacket(data.getBytes(), data.getBytes().length,new InetSocketAddress("127.0.0.1", 2644));
+            
+            udpSocket.send(p);
 
+            byte [] responce_buffer = new byte[256];
+            DatagramPacket responce = new DatagramPacket(responce_buffer, responce_buffer.length);
+            udpSocket.receive(responce);
+            System.out.println(new String(responce.getData()));
+
+
+            udpSocket.close();
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
