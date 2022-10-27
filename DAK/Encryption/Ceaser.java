@@ -38,19 +38,17 @@ public class Ceaser extends DAK.Encryption.Enc {
     c.decode("E");
 }
 
-
+//rotates the nunmber x within the given start and stop number ranges
+//see  https://en.wikipedia.org/wiki/Modulo_operation for properties
+//of modulus and how the math works
+//basically its just math to rotate numbers around a disc starting and stoping on the givne
+//values
+public static int rotateRange(int x,int shift,int start,int stop) {
+    return cmod(x+shift-start,stop-start+1)+start;
+}
 //this function takes a shift amount and uses it to encode the givenc haracter
 public static char EncodeChar(char c,int shift) {
-    return (char)
-    (
-        cmod(
-            (
-            /*convert to ascii and shift the character range to start at 
-            0 (as all modulus "clocks" start from zero)*/
-            ((int)c+shift)-65), 
-            26) //ceaser cypher uses a "wheel" with 65 letters, use mod base 26
-    +
-    65);//unshift the modulus clock to no longer start from zero, instead starting from 65 (ascii 'A')
+    return (char)rotateRange((int)c, shift, 48, 90);
 }
 @Override
 public String encode(String data) {
