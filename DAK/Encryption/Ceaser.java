@@ -15,27 +15,31 @@ public class Ceaser extends DAK.Encryption.Enc {
         if (ret_val < 0) return m + ret_val;
         return ret_val;
     }
-    /*** */
+    /*** key that we use to encrypt and decript*/
     public int shift_key;
     public Ceaser(int shift_amount) {
         shift_key = shift_amount;
     }
-    //contains some test code to make sure that everything works
-   public static void main(String [] args){
 
-    Ceaser c = new Ceaser(5);
-    if (c.testInverse()) {
-        System.out.println("[*] inverse works propperly!");
-    }
-    else {
-        System.out.println("[ERROR] inversion failed!");
-    }
-    System.out.println("[TEST 1 DUMP]");
-    System.out.println("\t data:" + Ceaser.inversion_test_string);
-    System.out.println("\t ecoded:" + c.encode(Ceaser.inversion_test_string));
-    System.out.println("\t decoded:" + c.decode(c.encode(Ceaser.inversion_test_string)));
+    /**
+     * contains test code to ensure that the ceaser class
+     * is encrypting and decrypting data properly
+     */
+    public static void main(String [] args){
 
-    c.decode("E");
+        Ceaser c = new Ceaser(5);
+        if (c.testInverse()) {
+            System.out.println("[*] inverse works propperly!");
+        }
+        else {
+            System.out.println("[ERROR] inversion failed!");
+        }
+        System.out.println("[TEST 1 DUMP]");
+        System.out.println("\t data:" + Ceaser.inversion_test_string);
+        System.out.println("\t ecoded:" + c.encode(Ceaser.inversion_test_string));
+        System.out.println("\t decoded:" + c.decode(c.encode(Ceaser.inversion_test_string)));
+
+        c.decode("E");
 }
 
 //rotates the nunmber x within the given start and stop number ranges
@@ -50,6 +54,10 @@ public static int rotateRange(int x,int shift,int start,int stop) {
 public static char EncodeChar(char c,int shift) {
     return (char)rotateRange((int)c, shift, 45, 96);
 }
+/**
+ * 
+ * encodes a string by rotating the ascii values of the individual characters
+ */
 @Override
 public String encode(String data) {
     data = data.toUpperCase();
@@ -62,6 +70,9 @@ public String encode(String data) {
     return ret_val;
 }
 
+/** 
+ * decodes a string by rotating the ascii values of the given characters
+*/
 @Override
 public String decode(String data) {
     data = data.toUpperCase();
