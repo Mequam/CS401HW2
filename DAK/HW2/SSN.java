@@ -8,7 +8,14 @@ public class SSN {
     }
     
     int [] ssnData = new int[3];
-    
+   
+    @Override
+    public String toString() {
+        return Integer.toString(ssnData[0]) +"-" + 
+            Integer.toString(ssnData[1]) + "-" + 
+            Integer.toString(ssnData[2]);
+    }
+
     SSN(String ssn) throws IllegalArgumentException {
         if (!isSSN(ssn)) throw new IllegalArgumentException("Invalid SSN!");
 
