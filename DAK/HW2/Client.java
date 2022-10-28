@@ -40,6 +40,9 @@ public class Client {
     }
 
     public static void main(String [] args) {
+        String server_addr_string = "127.0.0.1";
+        if (args.length > 0) server_addr_string = args[0];
+
         Scanner cin = new Scanner(System.in);
         //get the first and last names
         String firstName = demandUsername(cin, "Enter the first name: ");
@@ -57,7 +60,12 @@ public class Client {
         try {
             //send the data
             DatagramSocket udpSocket = new DatagramSocket(2645); //we will use this socket to send and recive
-            DatagramPacket p = new DatagramPacket(cipherTextSend.getBytes(), cipherTextSend.getBytes().length,new InetSocketAddress("127.0.0.1", 2644));            
+            DatagramPacket p = new DatagramPacket(
+                    cipherTextSend.getBytes(), 
+                    cipherTextSend.getBytes().length,
+                    new InetSocketAddress(server_addr_string, 2644)
+                );
+
             udpSocket.send(p);
 
             //recive the response into the required variable

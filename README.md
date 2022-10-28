@@ -24,4 +24,16 @@ java DAK/HW2/Server
 java DAK/HW2/Client
 ```
 
+optionally when running the client you can specify the server address on the command line
+
+for example:
+```bash
+java DAK/HW2/Client 127.0.0.1
+```
+
+note that the client defaults to localhost when no arguments are offered
+
+
+
+
 > note that you are in the root folder of the project when you run these
